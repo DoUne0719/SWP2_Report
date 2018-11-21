@@ -11,7 +11,7 @@ class Start(QWidget):
         self.controller = Controller(self.model)
         self.view = View(self.model, self.controller)
 
-        self.view.startGame()
+        self.view.firstStart()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

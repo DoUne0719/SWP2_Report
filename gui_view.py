@@ -157,7 +157,7 @@ class View(QWidget):
         # Button for a new game
         self.newGameButton = QToolButton()
         self.newGameButton.setText('New Game')
-        self.newGameButton.clicked.connect(self.startGame)
+        self.newGameButton.clicked.connect(self.newgameClicked)
         statusLayout.addWidget(self.newGameButton, 4, 0)
 
         # Layout placement
@@ -192,13 +192,17 @@ class View(QWidget):
 
         self.charInput.clear()
 
-    # when New Game Button clicked
-    def startGame(self):
-        self.model.restart()
-        self.message.clear()
-        self.charInput.clear()
-        self.message.clear()
+    def firstStart(self):
+        self.model.randFromDB()
         self.hangmanWindow.setPlaceholderText(self.hangmantext[self.maxTry - self.model.getTries()])
         self.currentWord.setText(self.model.getStatus())
-        self.guessedChars.setText(self.model.getGuessedCharsSort())
+        self.guessedChars.setPlaceholderText(self.model.getGuessedCharsSort())
+
+    # when New Game Button clicked
+    def newgameClicked(self):
+        self.model.restart()
+        self.message.clear()
+        self.guessedChars.clear()
+        self.hangmanWindow.setPlaceholderText(self.hangmantext[self.maxTry - self.model.getTries()])
+        self.currentWord.setText(self.model.getStatus())
         self.charInput.setEnabled(True)

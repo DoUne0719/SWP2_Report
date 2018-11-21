@@ -14,8 +14,11 @@ class Model:
         self.count = 0
         for line in lines:
             word = line.rstrip()
-            self.words.append(word)
-            self.count += 1
+            if len(word) < 12:
+                self.words.append(word)
+                self.count += 1
+            else:
+                continue
 
         print('%d words in DB' % self.count)
 
